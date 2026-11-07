@@ -2,7 +2,7 @@
   "name": "desalin-kilti-site",
   "version": "1.0.0",
   "private": true,
-  ëngines": {
+  "engines": {
     "node": ">=18"
   },
   "scripts": {
