@@ -1,0 +1,13 @@
+[build]
+  command = "node scripts/build.js"
+  publish = "dist"
+
+[[headers]]
+  for = "/data.json"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"

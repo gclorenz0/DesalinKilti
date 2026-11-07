@@ -1,0 +1,85 @@
+{
+  "titre": "Foire gastronomique de l’IMO : une 11e édition qui a rassemblé Dessalines",
+  "tag": "kilti",
+  "date": "2026-09-27",
+  "periode": "Le lundi 1er mai 2023",
+  "auteur": "E.D",
+  "langue": "fr",
+  "resume": "Le 1er mai 2023, jour de la fête du Travail, l’Institution Mixte Oasis a tenu la 11e édition de sa foire gastronomique, et Dessalines a répondu présent.",
+  "a_la_une": false,
+  "exemple": false,
+  "texte_visuel": "Foire gastronomique",
+  "image": "/media/photos/foire-gastronomique-imo-01.jpg",
+  "image_legende": "Des plats de poisson et de viande garnis d’oignons et de piments, vus d’en haut",
+  "image_credit": "",
+  "cadrage": 50,
+  "corps": "<p>Ce lundi 1er mai 2023, jour de la fête du Travail, l’Institution Mixte Oasis (IMO) a tenu la 11e édition de sa foire gastronomique.</p>\n<p>Malgré la situation socio-économique précaire du pays, l’école a jugé bon de célébrer cette journée. Et le public a suivi : une bonne partie de la population dessalinienne a répondu avec enthousiasme à l’invitation.</p>\n<p>Pour sa 11e édition, ce grand événement a encore une fois réuni des personnes de toutes classes et de tous horizons.</p>\n<blockquote><p>Chaque année, la foire gastronomique de l’IMO est un rendez-vous à ne pas manquer !</p></blockquote>",
+  "galerie": [
+    {
+      "image": "/media/photos/foire-gastronomique-imo-02.jpg",
+      "legende": "Le buffet : bananes pesées, riz et autres plats alignés sur la table"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-03.jpg",
+      "legende": "Une jeune femme en tenue traditionnelle bleue, tout sourire, une assiette à la main"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-04.jpg",
+      "legende": "Deux femmes au buffet, l’une tenant une écumoire"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-05.jpg",
+      "legende": "Deux femmes en jupes en wax vert et jaune entourent une fillette en robe bleue"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-06.jpg",
+      "legende": "Une marmite de sauce jaune à côté de plats de riz"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-07.jpg",
+      "legende": "Des jeunes filles en tenues colorées, certaines coiffées de foulards, dans la cour"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-08.jpg",
+      "legende": "Une participante souriante discute avec des convives autour d’une longue table"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-09.jpg",
+      "legende": "Une participante se sert au buffet"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-10.jpg",
+      "legende": "Un plat de viande en sauce"
+    },
+    {
+      "image": "/media/photos/foire-gastronomique-imo-11.jpg",
+      "legende": "Une jeune femme se sert au buffet"
+    }
+  ],
+  "credit_photos": "",
+  "encadre": {
+    "titre": "En bref",
+    "lignes": [
+      {
+        "libelle": "Événement",
+        "valeur": "Foire gastronomique de l’IMO"
+      },
+      {
+        "libelle": "Organisateur",
+        "valeur": "Institution Mixte Oasis (IMO)"
+      },
+      {
+        "libelle": "Occasion",
+        "valeur": "Fête du Travail"
+      },
+      {
+        "libelle": "Date",
+        "valeur": "Lundi 1er mai 2023"
+      },
+      {
+        "libelle": "Édition",
+        "valeur": "11e"
+      }
+    ]
+  }
+}

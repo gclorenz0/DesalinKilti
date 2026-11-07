@@ -1,0 +1,101 @@
+{
+  "titre": "Jeni Desalin, un pari réussi !",
+  "tag": "edikasyon",
+  "date": "2026-09-25",
+  "periode": "Du 4 mars au 27 avril 2022",
+  "auteur": "E.D",
+  "langue": "fr",
+  "resume": "Du 4 mars au 27 avril 2022, le concours Jeni Desalin a mobilisé les écoles de la commune. Retour sur la finale au CLAC et le palmarès.",
+  "a_la_une": true,
+  "exemple": false,
+  "texte_visuel": "Jeni Desalin",
+  "image": "/media/photos/jeni-desalin-01.jpg",
+  "image_legende": "Les élèves de l'IMO, médaille au cou, tiennent la coupe de Jeni Desalin et leurs plaques",
+  "image_credit": "Ricky Pic",
+  "cadrage": 50,
+  "corps": "<p>Desalin Kilti, cette association qui sonne l’alarme à Dessalines, a encore une fois rassemblé toutes les couches de la société civile autour d’un événement singulier. En effet, les deux derniers mois à Dessalines se sont animés grandement par l’accouchement de cette noble activité : JENI DESALIN.</p>\n<p>Cette initiative qui a débuté le 4 mars 2022 a pris fin le mercredi 27 avril dernier. Au cours de la cérémonie de clôture, les deux équipes finalistes ont bel et bien mis l’ambiance au CLAC. L’Institution Mixte Oasis (IMO) a récolté plus de points face au Lycée Jacques 1er, ce qui lui a valu le titre de la première place. L’Institution Jacques Stephen Alexis (IJSA) a remporté la troisième place. Ainsi, plusieurs autres prix ont été attribués aux différents acteurs qui ont pris part au concours : le titre du meilleur joueur à Altidas Peteslot, élève du Lycée Jacques 1er, le titre du meilleur entraîneur à Daniel Riboul de l’IJSA et le titre du meilleur public à l’IMO.</p>\n<p>Durant le concours, les membres de chaque équipe ont eu l’occasion de faire valoir leur établissement en dépit de toutes sortes de difficultés rencontrées. Les élèves, les professeurs, les accompagnateurs et le public en général ont tous contribué d’une façon ou d’une autre au succès de cet évènement.</p>\n<p>Desalin Kilti vous donne rendez-vous l’année prochaine pour une deuxième édition de JENI DESALIN, encore plus fructueuse.</p>",
+  "galerie": [
+    {
+      "image": "/media/photos/jeni-desalin-02.jpg",
+      "legende": "L'équipe de l'Institution Mixte Oasis pose avec le trophée, ses médailles et la bannière de l'école"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-03.jpg",
+      "legende": "Le public, nombreux, applaudit dans la salle décorée de ballons jaunes et bleus"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-04.jpg",
+      "legende": "La salle remplie d'élèves, de professeurs et d'invités"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-05.jpg",
+      "legende": "Deux hommes en veston échangent sur scène, micro en main"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-06.jpg",
+      "legende": "Une équipe en chemise bleue se concerte avant de répondre"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-07.jpg",
+      "legende": "Des candidats en uniforme bleu, le regard levé, attendent la question"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-08.jpg",
+      "legende": "Des élèves de l'IMO se consultent autour de la table"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-09.jpg",
+      "legende": "Un élève de l'IMO répond au micro à côté d'un coéquipier"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-10.jpg",
+      "legende": "Une équipe en uniforme bleu, debout derrière sa table"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-11.jpg",
+      "legende": "Une participante en uniforme à carreaux bleus, concentrée"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-12.jpg",
+      "legende": "Une élève en uniforme sourit dans le public"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-13.jpg",
+      "legende": "Une jeune femme danse, tout sourire, devant les ballons"
+    },
+    {
+      "image": "/media/photos/jeni-desalin-14.jpg",
+      "legende": "Des invités sur scène avec médailles et plaques lors de la remise des prix"
+    }
+  ],
+  "credit_photos": "Ricky Pic",
+  "encadre": {
+    "titre": "Palmarès",
+    "lignes": [
+      {
+        "libelle": "Première place",
+        "valeur": "Institution Mixte Oasis (IMO)"
+      },
+      {
+        "libelle": "Finaliste",
+        "valeur": "Lycée Jacques 1er"
+      },
+      {
+        "libelle": "Troisième place",
+        "valeur": "Institution Jacques Stephen Alexis (IJSA)"
+      },
+      {
+        "libelle": "Meilleur joueur",
+        "valeur": "Altidas Peteslot, Lycée Jacques 1er"
+      },
+      {
+        "libelle": "Meilleur entraîneur",
+        "valeur": "Daniel Riboul, IJSA"
+      },
+      {
+        "libelle": "Meilleur public",
+        "valeur": "IMO"
+      }
+    ]
+  }
+}
