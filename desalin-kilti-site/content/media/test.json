@@ -1,0 +1,13 @@
+{
+  "titre": "Test",
+  "tag": "kilti",
+  "date": "2026-11-06",
+  "auteur": "Gcl",
+  "langue": "fr",
+  "resume": "Un petit test",
+  "a_la_une": false,
+  "image": "/media/188710049_2750420195101731_3877365971961201315_n.jpg",
+  "cadrage": 50,
+  "corps": "un petit test simple.",
+  "exemple": false
+}
