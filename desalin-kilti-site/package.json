@@ -1,0 +1,11 @@
+{
+  "name": "desalin-kilti-site",
+  "version": "1.0.0",
+  "private": true,
+  ëngines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.js"
+  }
+}
