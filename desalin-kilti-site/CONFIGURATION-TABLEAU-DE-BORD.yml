@@ -1,0 +1,274 @@
+# Configuration du tableau de bord Pages CMS (https://app.pagescms.org) pour le site Desalin Kilti
+media:
+  input: media
+  output: /media
+  extensions: [jpg, jpeg, png, webp]
+  rename: safe
+
+content:
+  # ---------------------------------------------------------------- Média
+  - name: media
+    label: "Média (articles)"
+    type: collection
+    path: content/media
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: titre
+      fields: [titre, tag, date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: titre
+        label: "Titre"
+        type: string
+        required: true
+      - name: tag
+        label: "Rubrique"
+        type: select
+        required: true
+        default: kilti
+        options:
+          values:
+            - { name: kilti, value: kilti, label: "#Kilti" }
+            - { name: patrimwan, value: patrimwan, label: "#Patrimwàn (patrimoine)" }
+            - { name: edikasyon, value: edikasyon, label: "#Edikasyon" }
+      - name: date
+        label: "Date de publication"
+        description: "Sert à classer les articles : le plus récent apparaît en premier. Elle n'est pas affichée."
+        type: date
+        required: true
+      - name: periode
+        label: "Date affichée (facultatif)"
+        description: "Exemple : « Le 10 juin 2021 » ou « Du 4 mars au 27 avril 2022 »."
+        type: string
+      - name: auteur
+        label: "Auteur ou signature (facultatif)"
+        type: string
+      - name: langue
+        label: "Langue de l'article"
+        type: select
+        default: fr
+        options:
+          values:
+            - { name: fr, value: fr, label: "Français" }
+            - { name: ht, value: ht, label: "Kreyòl" }
+      - name: resume
+        label: "Résumé (affiché sur la carte de l'article)"
+        type: text
+        required: true
+      - name: a_la_une
+        label: "À la une (grande carte en premier)"
+        type: boolean
+        default: false
+      - name: image
+        label: "Photo principale"
+        description: "Conseil : moins de 1 Mo, environ 1600 pixels de large."
+        type: image
+      - name: image_legende
+        label: "Légende de la photo principale"
+        type: string
+      - name: image_credit
+        label: "Crédit de la photo principale (photographe)"
+        type: string
+      - name: cadrage
+        label: "Cadrage de la photo (0 = haut, 50 = centre, 100 = bas)"
+        type: number
+        default: 50
+      - name: texte_visuel
+        label: "Texte du visuel si l'article n'a pas de photo"
+        type: string
+      - name: corps
+        label: "Texte de l'article"
+        description: "Les citations s'affichent en grand. Pour une photo dans le texte, son texte alternatif sert de légende."
+        type: rich-text
+        options:
+          format: html
+      - name: galerie
+        label: "Galerie photos (en bas de l'article)"
+        type: object
+        list: true
+        fields:
+          - { name: image, label: "Photo", type: image }
+          - { name: legende, label: "Légende", type: string }
+      - name: credit_photos
+        label: "Crédit des photos de la galerie"
+        type: string
+      - name: encadre
+        label: "Encadré (à droite du texte)"
+        type: object
+        fields:
+          - { name: titre, label: "Titre de l'encadré (ex. « En bref »)", type: string }
+          - name: lignes
+            label: "Lignes"
+            type: object
+            list: true
+            fields:
+              - { name: libelle, label: "Libellé", type: string }
+              - { name: valeur, label: "Valeur", type: string }
+      - name: exemple
+        label: "Article exemple (affiche l'étiquette « Article exemple »)"
+        type: boolean
+        default: false
+
+  # ---------------------------------------------------------------- Pawòl Desalin
+  - name: pawol
+    label: "Pawòl Desalin (nouvelles)"
+    type: collection
+    path: content/pawol
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: titre
+      fields: [titre, tag, date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: titre
+        label: "Titre"
+        type: string
+        required: true
+      - name: tag
+        label: "Rubrique"
+        type: select
+        required: true
+        default: sosyal
+        options:
+          values:
+            - { name: politik, value: politik, label: "#Politik" }
+            - { name: sosyal, value: sosyal, label: "#Sosyal" }
+            - { name: ekonomi, value: ekonomi, label: "#Ekonomi" }
+      - name: date
+        label: "Date de publication"
+        description: "Sert à classer les nouvelles : la plus récente apparaît en premier."
+        type: date
+        required: true
+      - name: periode
+        label: "Date affichée (facultatif)"
+        type: string
+      - name: auteur
+        label: "Auteur ou signature (facultatif)"
+        type: string
+      - name: langue
+        label: "Langue"
+        type: select
+        default: fr
+        options:
+          values:
+            - { name: fr, value: fr, label: "Français" }
+            - { name: ht, value: ht, label: "Kreyòl" }
+      - name: resume
+        label: "Résumé (affiché dans la liste)"
+        type: text
+        required: true
+      - name: sobre
+        label: "Mise en page sobre (hommage, deuil)"
+        type: boolean
+        default: false
+      - name: image
+        label: "Photo principale (facultatif)"
+        type: image
+      - name: image_legende
+        label: "Légende de la photo"
+        type: string
+      - name: image_credit
+        label: "Crédit de la photo"
+        type: string
+      - name: cadrage
+        label: "Cadrage de la photo (0 = haut, 50 = centre, 100 = bas)"
+        type: number
+        default: 50
+      - name: corps
+        label: "Texte"
+        type: rich-text
+        options:
+          format: html
+      - name: lien_video
+        label: "Lien d'une vidéo Facebook (facultatif)"
+        description: "Affiche un bouton « Voir la vidéo sur Facebook »."
+        type: string
+      - name: galerie
+        label: "Galerie photos"
+        type: object
+        list: true
+        fields:
+          - { name: image, label: "Photo", type: image }
+          - { name: legende, label: "Légende", type: string }
+      - name: credit_photos
+        label: "Crédit des photos de la galerie"
+        type: string
+      - name: encadre
+        label: "Encadré"
+        type: object
+        fields:
+          - { name: titre, label: "Titre de l'encadré", type: string }
+          - name: lignes
+            label: "Lignes"
+            type: object
+            list: true
+            fields:
+              - { name: libelle, label: "Libellé", type: string }
+              - { name: valeur, label: "Valeur", type: string }
+
+  # ---------------------------------------------------------------- Réglages
+  - name: reglages
+    label: "Réglages (direct, radio, équipe)"
+    type: file
+    path: content/reglages.json
+    format: json
+    fields:
+      - name: direct
+        label: "Direct Facebook"
+        type: object
+        fields:
+          - name: etat
+            label: "État"
+            type: select
+            default: aucun
+            options:
+              values:
+                - { name: aucun, value: aucun, label: "Aucun direct (caché)" }
+                - { name: direct, value: direct, label: "En direct maintenant" }
+                - { name: rediffusion, value: rediffusion, label: "Rediffusion" }
+          - { name: lien, label: "Lien de la vidéo en direct sur Facebook", type: string }
+          - { name: titre_fr, label: "Titre de l'émission (français)", type: string }
+          - { name: titre_ht, label: "Titre de l'émission (kreyòl)", type: string }
+      - name: radyo
+        label: "Radio Pawòl Desalin"
+        type: object
+        fields:
+          - { name: afficher, label: "Afficher la radio sur le site", type: boolean, default: true }
+          - name: etat
+            label: "État de la radio"
+            type: select
+            default: hors_antenne
+            options:
+              values:
+                - { name: hors_antenne, value: hors_antenne, label: "Hors antenne" }
+                - { name: direct, value: direct, label: "En direct maintenant" }
+                - { name: rediffusion, value: rediffusion, label: "Rediffusion" }
+          - { name: titre_fr, label: "Titre de l'émission (français)", type: string }
+          - { name: titre_ht, label: "Titre de l'émission (kreyòl)", type: string }
+          - { name: type_lecteur, label: "Type de lecteur Caster.fm (data-type du code)", type: string }
+          - { name: jeton_public, label: "Jeton public (data-publicToken du code)", type: string }
+          - { name: id_chaine, label: "Identifiant de chaîne (data-channelId du code)", type: string }
+      - name: equipe
+        label: "Équipe"
+        type: object
+        list: true
+        fields:
+          - { name: nom, label: "Nom", type: string }
+          - name: role
+            label: "Rôle"
+            type: select
+            default: membre
+            options:
+              values:
+                - { name: fondateur, value: fondateur, label: "Fondateur" }
+                - { name: membre, value: membre, label: "Membre" }
+
+settings:
+  content:
+    merge: true
