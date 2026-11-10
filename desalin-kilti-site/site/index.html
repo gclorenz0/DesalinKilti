@@ -261,11 +261,11 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;letter-spacing:0}
 @media (max-width:860px){.lecture-grille{grid-template-columns:1fr}.encadre{position:static}}
 
 /* Pawòl Desalin */
-.radyo{margin-bottom:clamp(2.5rem,5vw,4rem)}
+.radyo-section{border-top:1px solid var(--trait)}
 .radyo-carte{background:var(--bleu-fonce);color:#fff;border-radius:6px;padding:clamp(1.25rem,3vw,2rem);border-top:6px solid var(--rouge)}
 .radyo-tete{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
 .radyo-icone{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--rouge);color:#fff}
-.radyo-tete h3{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:700;color:#fff}
+.radyo-tete h2{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:700;color:#fff}
 .radyo-tete p{margin:.2rem 0 0;color:#D6E0F2}
 .radyo-lecteur{background:#fff;border-radius:4px;padding:.5rem;min-height:120px;color:#101828}
 .radyo-attente{margin:.5rem;font-style:italic;color:#475467}
@@ -429,23 +429,6 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;letter-spacing:0}
   </section>
 
   <section class="section pawol" id="pawol" aria-labelledby="titre-pawol">
-    <div class="conteneur radyo" id="radyo">
-      <div class="radyo-carte">
-        <div class="radyo-tete">
-          <span class="radyo-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
-          </span>
-          <div>
-            <h3>Desalin Kilti Radyo</h3>
-            <p data-i18n="radyo_sous">Écoutez nos émissions en direct, partout dans le monde.</p>
-          </div>
-        </div>
-        <div class="radyo-lecteur">
-          <p class="radyo-attente" data-i18n="radyo_attente">Le lecteur radio s’affiche sur le site en ligne.</p>
-          <div id="radyo-widget"></div>
-        </div>
-      </div>
-    </div>
     <div class="conteneur direct" id="direct" hidden>
       <div class="direct-tete">
         <span class="badge-direct" id="direct-badge"><span class="point" aria-hidden="true"></span><span id="direct-etat"></span></span>
@@ -467,6 +450,26 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;letter-spacing:0}
         </div>
       </div>
       <div class="nouvelles" id="nouvelles" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section radyo-section" id="radyo" aria-labelledby="titre-radyo">
+    <div class="conteneur">
+      <div class="radyo-carte">
+        <div class="radyo-tete">
+          <span class="radyo-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+          </span>
+          <div>
+            <h2 id="titre-radyo">Desalin Kilti Radyo</h2>
+            <p data-i18n="radyo_sous">Écoutez nos émissions en direct, partout dans le monde.</p>
+          </div>
+        </div>
+        <div class="radyo-lecteur">
+          <p class="radyo-attente" data-i18n="radyo_attente">Le lecteur radio s’affiche sur le site en ligne.</p>
+          <div id="radyo-widget"></div>
+        </div>
+      </div>
     </div>
   </section>
 
