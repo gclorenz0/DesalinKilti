@@ -31,8 +31,7 @@ content:
         options:
           values:
             - { value: kilti, label: "#Kilti" }
-            - { value: tradisyon, label: "#Tradisyon" }
-            - { value: lekti, label: "#Lekti" }
+            - { value: patrimwan, label: "#Patrimwàn (patrimoine)" }
             - { value: edikasyon, label: "#Edikasyon" }
       - name: date
         label: "Date de publication"
@@ -232,10 +231,21 @@ content:
           - { name: titre_fr, label: "Titre de l'émission (français)", type: string }
           - { name: titre_ht, label: "Titre de l'émission (kreyòl)", type: string }
       - name: radyo
-        label: "Desalin Kilti Radyo"
+        label: "Radio Pawòl Desalin"
         type: object
         fields:
           - { name: afficher, label: "Afficher la radio sur le site", type: boolean, default: true }
+          - name: etat
+            label: "État de la radio"
+            type: select
+            default: hors_antenne
+            options:
+              values:
+                - { value: hors_antenne, label: "Hors antenne" }
+                - { value: direct, label: "En direct maintenant" }
+                - { value: rediffusion, label: "Rediffusion" }
+          - { name: titre_fr, label: "Titre de l'émission (français)", type: string }
+          - { name: titre_ht, label: "Titre de l'émission (kreyòl)", type: string }
           - { name: type_lecteur, label: "Type de lecteur Caster.fm (data-type du code)", type: string }
           - { name: jeton_public, label: "Jeton public (data-publicToken du code)", type: string }
           - { name: id_chaine, label: "Identifiant de chaîne (data-channelId du code)", type: string }
