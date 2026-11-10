@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Desalin Kilti">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<title>Desalin Kilti</title>
+<meta name="description" content="Desalin Kilti, organisation culturelle et sociale de la commune de Dessalines : culture, traditions locales, éducation et lecture.">
+<style>
+/* Police du site : Roboto (intégrée, toutes les graisses, normale et italique) */
+@font-face{font-family:"Desalin Roboto";src:url(fonts/roboto.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Desalin Roboto";src:url(fonts/roboto-italic.woff2) format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
+:root{
+  --bleu:#0A3A8F;
+  --bleu-fonce:#062559;
+  --jaune:#FFC928;
+  --rouge:#E3242B;
+  --noir:#000;
+  --blanc:#fff;
+
+  --bg:#FFFFFF;
+  --surface:#F3F6FC;
+  --texte:#101828;
+  --texte-doux:#475467;
+  --trait:#D5DEEE;
+  --lien:var(--bleu);
+
+  --display:"Desalin Roboto",Roboto,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --lecture:"Desalin Roboto",Roboto,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#06173A; --surface:#0C2352; --texte:#EEF2FA; --texte-doux:#AEBBD6; --trait:#1F3A70; --lien:var(--jaune);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#06173A; --surface:#0C2352; --texte:#EEF2FA; --texte-doux:#AEBBD6; --trait:#1F3A70; --lien:var(--jaune);
+}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+body{margin:0;background:var(--bg);color:var(--texte);font-family:var(--lecture);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--lien)}
+:focus-visible{outline:3px solid var(--rouge);outline-offset:3px}
+.conteneur{width:min(1160px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;letter-spacing:0}
+
+/* En-tête */
+.entete{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--trait)}
+.entete .conteneur{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:68px}
+.logo{display:block;background:#fff;border-radius:6px;padding:4px 6px;line-height:0}
+.logo img{height:40px;width:auto}
+.nav{display:flex;gap:.25rem;flex-wrap:wrap;justify-content:flex-end}
+.nav a{font-family:var(--display);font-weight:700;font-size:.95rem;text-decoration:none;color:var(--texte);padding:.45rem .7rem;border-radius:999px}
+.nav a:hover{background:var(--surface)}
+.nav a.cta{background:var(--bleu);color:#fff}
+.nav a.cta:hover{background:var(--bleu-fonce)}
+.entete .conteneur{flex-wrap:nowrap}
+.nav{margin-left:auto}
+.langue{display:flex;flex:none;border:2px solid var(--bleu);border-radius:999px;overflow:hidden}
+:root[data-theme="dark"] .langue{border-color:var(--jaune)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .langue{border-color:var(--jaune)}}
+.langue button{font-family:var(--display);font-weight:800;font-size:.85rem;border:0;background:transparent;color:var(--texte);padding:.4rem .75rem;cursor:pointer}
+.langue button[aria-pressed="true"]{background:var(--jaune);color:#000}
+.langue .court{display:none}
+@media (max-width:980px){.langue .long{display:none}.langue .court{display:inline}}
+@media (max-width:640px){.nav a:not(.cta):not(.nav-direct){display:none}.nav:has(.nav-direct:not([hidden])) a.cta{display:none}.logo img{height:34px}}
+
+/* Accueil */
+.hero{background:#0B5FB0;color:#fff;overflow:hidden;position:relative;min-height:clamp(540px,82vh,780px);display:flex;align-items:center}
+.hero > .conteneur{position:relative;z-index:1}
+/* Paysage animé */
+.hero-fond{position:absolute;inset:0;overflow:hidden;container-type:size}
+.scene{position:absolute;left:50%;top:50%;width:max(100cqw,133.34cqh);aspect-ratio:4/3;transform:translate(-50%,-50%)}
+.kb{position:absolute;inset:0;transform-origin:62% 40%}
+.paysage{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+.nuage{position:absolute;left:-30%;width:22%;aspect-ratio:2.3/1;opacity:.95;filter:blur(1.2px);
+  background:
+    radial-gradient(circle at 30% 58%,rgba(255,255,255,.98) 0 13%,rgba(255,255,255,0) 22%),
+    radial-gradient(circle at 46% 42%,rgba(255,255,255,.98) 0 17%,rgba(255,255,255,0) 27%),
+    radial-gradient(circle at 63% 50%,rgba(255,255,255,.97) 0 14%,rgba(255,255,255,0) 23%),
+    radial-gradient(circle at 77% 62%,rgba(255,255,255,.95) 0 10%,rgba(255,255,255,0) 18%),
+    radial-gradient(ellipse 42% 18% at 53% 68%,rgba(240,246,255,.95) 0 60%,rgba(255,255,255,0) 100%)}
+.n1{top:6%;width:20%}
+.n2{top:17%;width:13%;opacity:.8}
+.n3{top:28%;width:17%;opacity:.85}
+.n4{top:39%;width:10%;opacity:.7}
+.reflets{position:absolute;inset:0;mix-blend-mode:screen;opacity:.55;
+  clip-path:polygon(0 72.5%,35% 73.5%,62% 75.5%,100% 80.5%,100% 87%,62% 89%,30% 88%,0 86%);
+  background-image:
+    radial-gradient(ellipse 16px 2px at 50% 50%,rgba(255,255,255,.75),rgba(255,255,255,0) 70%),
+    radial-gradient(ellipse 22px 2px at 50% 50%,rgba(210,235,255,.6),rgba(255,255,255,0) 70%);
+  background-size:70px 13px,110px 19px;background-position:0 0,35px 6px}
+.voile{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(4,22,56,.86) 0%,rgba(4,22,56,.62) 38%,rgba(4,22,56,.12) 72%,rgba(4,22,56,0) 100%),
+  linear-gradient(0deg,rgba(4,22,56,.35),rgba(4,22,56,0) 35%)}
+@media (prefers-reduced-motion:no-preference){
+  .kb{animation:kb 40s ease-in-out infinite alternate}
+  .nuage{animation:derive linear infinite}
+  .n1{animation-duration:95s;animation-delay:-20s}
+  .n2{animation-duration:130s;animation-delay:-75s}
+  .n3{animation-duration:110s;animation-delay:-50s}
+  .n4{animation-duration:150s;animation-delay:-110s}
+  .reflets{animation:reflets 7s linear infinite, scintille 4s ease-in-out infinite alternate}
+  @keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.09) translate(-1.5%,-1%)}}
+  @keyframes derive{from{left:-30%}to{left:115%}}
+  @keyframes reflets{from{background-position:0 0,35px 6px}to{background-position:70px 0,-75px 6px}}
+  @keyframes scintille{from{opacity:.35}to{opacity:.7}}
+}
+.hero .conteneur{display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:2rem;padding-block:clamp(3rem,8vw,6.5rem)}
+.hero .bouton.plein{background:var(--jaune);border-color:var(--jaune);color:#000}
+.hero .bouton.plein:hover{background:#fff;border-color:#fff}
+.hero .bouton.vide{color:#fff;border-color:#fff}
+.hero .bouton.vide:hover{background:rgba(255,255,255,.14)}
+.hero h1{font-size:clamp(2.6rem,7.2vw,5.6rem);font-weight:900;font-stretch:112%;color:#fff;text-shadow:0 2px 24px rgba(4,22,56,.35)}
+.hero p{font-size:clamp(1.1rem,1.8vw,1.3rem);max-width:34rem;margin:1.5rem 0 2rem;color:#EAF1FB}
+.boutons{display:flex;gap:.75rem;flex-wrap:wrap}
+.bouton{display:inline-block;font-family:var(--display);font-weight:800;font-size:1rem;text-decoration:none;padding:.9rem 1.4rem;border-radius:4px;border:2px solid var(--bleu-fonce)}
+.bouton.plein{background:var(--bleu-fonce);color:#fff}
+.bouton.plein:hover{background:var(--noir);border-color:var(--noir)}
+.bouton.vide{color:var(--bleu-fonce);background:transparent}
+.bouton.vide:hover{background:rgba(6,37,89,.08)}
+.dieze{font-family:var(--display);font-weight:900;font-size:clamp(12rem,30vw,26rem);line-height:.8;color:var(--rouge);text-align:center;user-select:none;transform:rotate(-6deg)}
+@media (prefers-reduced-motion:no-preference){
+  .dieze{animation:arrivee .9s cubic-bezier(.2,.9,.25,1.2) both}
+  @keyframes arrivee{from{transform:rotate(-40deg) scale(.4);opacity:0}to{transform:rotate(-6deg) scale(1);opacity:1}}
+}
+@media (max-width:760px){
+  .hero .conteneur{grid-template-columns:1fr}
+  .dieze{position:absolute;right:-2rem;top:-1.5rem;font-size:14rem;opacity:.9;z-index:0}
+  .voile{background:linear-gradient(0deg,rgba(4,22,56,.85) 0%,rgba(4,22,56,.58) 55%,rgba(4,22,56,.22) 100%)}
+  .hero .texte{position:relative;z-index:1}
+}
+
+/* Média */
+.section{padding-block:clamp(3.5rem,7vw,6rem)}
+.titre-section{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem 2rem;margin-bottom:2rem}
+.titre-section h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;font-stretch:108%}
+.titre-section p{margin:.5rem 0 0;color:var(--texte-doux);max-width:36rem}
+.filtres{display:flex;flex-wrap:wrap;gap:.5rem}
+.filtre{font-family:var(--display);font-weight:800;font-size:.95rem;cursor:pointer;border:2px solid var(--bleu);background:transparent;color:var(--lien);padding:.45rem .9rem;border-radius:999px}
+:root[data-theme="dark"] .filtre{border-color:var(--jaune)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .filtre{border-color:var(--jaune)}}
+.filtre[aria-pressed="true"]{background:var(--rouge);border-color:var(--rouge);color:#fff}
+
+.articles{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem 1.5rem}
+.article{display:flex;flex-direction:column;gap:.75rem}
+.article.une{grid-column:span 2;grid-row:span 2}
+.visuel{position:relative;aspect-ratio:16/10;border-radius:4px;overflow:hidden;display:flex;align-items:flex-end;padding:1rem}
+.article.une .visuel{aspect-ratio:auto;flex:1;min-height:280px}
+.visuel .grand{position:absolute;right:-.06em;bottom:-.3em;font-family:var(--display);font-weight:900;font-size:10rem;line-height:1;opacity:.95}
+.article.une .visuel .grand{font-size:20rem}
+.v-kilti{background:var(--bleu);color:var(--jaune)}
+.v-tradisyon{background:var(--rouge);color:#fff}
+.v-lekti{background:var(--jaune);color:var(--bleu-fonce)}
+.v-edikasyon{background:var(--bleu-fonce);color:var(--rouge)}
+.v-patrimwan{background:var(--rouge);color:#fff}
+.exemple{position:relative;z-index:1;font-family:var(--display);font-size:.8rem;font-weight:700;background:rgba(255,255,255,.92);color:#000;padding:.2rem .55rem;border-radius:3px}
+.tag{font-family:var(--display);font-weight:800;font-size:.9rem;color:var(--rouge)}
+.article h3{font-size:1.35rem;font-weight:800;font-stretch:104%;line-height:1.15}
+.article.une h3{font-size:clamp(1.6rem,3vw,2.3rem)}
+.article h3 a{color:var(--texte);text-decoration:none}
+.article h3 a:hover{text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:var(--jaune)}
+.article p{margin:0;color:var(--texte-doux);font-size:1rem}
+.vide-msg{grid-column:1/-1;color:var(--texte-doux)}
+@media (max-width:900px){.articles{grid-template-columns:repeat(2,1fr)}.article.une{grid-column:1/-1;grid-row:auto}}
+@media (max-width:560px){.articles{grid-template-columns:1fr}.article.une .visuel{min-height:220px}.article.une .visuel .grand{font-size:13rem}}
+
+.lien-visuel{display:block;text-decoration:none}
+.article.une .lien-visuel{flex:1;display:flex}
+.article.une .lien-visuel .visuel{flex:1}
+.v-edikasyon .nom-visuel{color:var(--jaune)}
+.nom-visuel{position:relative;z-index:1;font-family:var(--display);font-weight:900;font-stretch:115%;font-size:clamp(2rem,5vw,3.6rem);line-height:.95;max-width:70%}
+.tag .date{font-weight:600;color:var(--texte-doux)}
+.lire{font-family:var(--display);font-weight:800;font-size:.95rem;color:var(--lien);text-underline-offset:4px}
+
+/* Vue article */
+.lecture{display:none}
+.mode-lecture main > section{display:none}
+.mode-lecture .lecture{display:block}
+.lecture-entete{background:var(--jaune);color:var(--noir);padding-block:clamp(2rem,5vw,4rem)}
+.lecture-entete .tag{display:block;color:var(--rouge)}
+.lecture-entete h1{font-size:clamp(2.4rem,6.5vw,5rem);font-weight:900;font-stretch:112%;color:var(--bleu-fonce);margin:.5rem 0 1rem;max-width:18ch;outline:none}
+.lecture-entete .meta{margin:0;font-size:1rem;color:#2a2a2a}
+.retour{display:inline-block;margin-bottom:1.5rem;font-family:var(--display);font-weight:800;color:var(--bleu-fonce);text-underline-offset:4px}
+.lecture-grille{display:grid;grid-template-columns:minmax(0,38rem) minmax(0,20rem);justify-content:space-between;gap:3rem;padding-block:clamp(2.5rem,5vw,4rem)}
+.lecture-corps p{margin:0 0 1.4em;font-size:1.15rem;line-height:1.8}
+.lecture-corps p:first-child{font-size:1.3rem;line-height:1.7}
+.lecture-corps ol{margin:-.4em 0 1.6em;padding-left:1.6em;font-size:1.1rem;line-height:1.7}
+.lecture-corps li{padding-left:.3em;margin-bottom:.35em}
+.lecture-corps li::marker{font-family:var(--display);font-weight:800;color:var(--rouge)}
+.lecture-corps .accent{font-family:var(--display);font-weight:900;font-stretch:108%;font-size:clamp(1.5rem,3vw,2rem);line-height:1.15;color:var(--bleu);border-left:8px solid var(--jaune);padding-left:1rem;margin-top:2rem}
+:root[data-theme="dark"] .lecture-corps .accent{color:var(--jaune)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lecture-corps .accent{color:var(--jaune)}}
+.article:not(.une) .nom-visuel{font-size:1.7rem;max-width:80%}
+.lecture-corps .lien-externe{margin:2rem 0}
+.lecture-corps .lien-externe .bouton{font-size:1.05rem}
+.lecture-corps .lire-aussi{border-left:4px solid var(--trait);padding:.2rem 0 .2rem 1rem;margin:2rem 0}
+.lecture-corps .lire-aussi span{display:block;font-family:var(--display);font-weight:800;font-size:.85rem;color:var(--texte-doux)}
+.lecture-corps .lire-aussi a{font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--lien)}
+.lecture-corps .figure-article{margin:2.2rem 0}
+.lecture-corps .figure-article img{width:100%;border-radius:4px;display:block}
+.lecture-corps .figure-article.portrait img{max-width:min(26rem,100%);max-height:80vh;width:auto;margin-inline:auto}
+.lecture-corps .figure-article figcaption{margin-top:.6rem;font-size:.9rem;color:var(--texte-doux);text-align:left}
+.lecture-corps .figure-article.portrait figcaption{max-width:min(26rem,100%);margin-inline:auto}
+.lecture-corps .note-source{font-size:.9rem;color:var(--texte-doux);margin-top:1.5rem}
+.lecture-corps .final{font-style:italic;color:var(--texte-doux);border-top:1px solid var(--trait);padding-top:1.4rem;margin-top:2rem}
+.lecture.sobre .lecture-entete{background:#111827;color:#fff}
+.lecture.sobre .lecture-entete h1{color:#fff;font-stretch:100%;font-weight:800}
+.lecture.sobre .lecture-entete .tag{color:var(--jaune)}
+.lecture.sobre .lecture-entete .meta{color:#D1D5DB}
+.lecture.sobre .retour{color:#fff}
+.lecture.sobre .photo-une{max-width:780px}
+.lecture.sobre .photo-une img{box-shadow:0 0 0 6px var(--bg);aspect-ratio:3/2;max-height:none}
+.lecture-corps .signature{font-family:var(--display);font-weight:800;text-align:right}
+.encadre{align-self:start;position:sticky;top:calc(env(safe-area-inset-top,0px) + 90px);border-top:6px solid var(--rouge);background:var(--surface);padding:1.5rem}
+.encadre h2{font-size:1.6rem;font-weight:900;margin-bottom:1rem}
+.encadre dl{margin:0}
+.encadre dt{font-family:var(--display);font-weight:800;font-size:.95rem;color:var(--rouge);margin-top:1rem}
+.encadre dt:first-child{margin-top:0}
+.encadre dd{margin:.15rem 0 0;font-size:1rem}
+.v-photo{padding:0;background:var(--surface)}
+.v-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo-une{margin:0;margin-top:clamp(-2.5rem,-4vw,-1.5rem);position:relative}
+.photo-une img{width:100%;max-height:640px;object-fit:cover;border-radius:4px;box-shadow:0 0 0 6px var(--bg)}
+.photo-une figcaption{margin-top:.75rem;font-size:.9rem;color:var(--texte-doux)}
+.lecture-entete{padding-bottom:clamp(3.5rem,7vw,5.5rem)}
+.galerie-bloc{padding-bottom:clamp(3rem,6vw,5rem)}
+.galerie-titre{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;border-top:6px solid var(--jaune);padding-top:1.5rem;margin-bottom:1.5rem}
+.galerie-titre h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;font-stretch:108%}
+.galerie-titre p{margin:0;color:var(--texte-doux);font-size:.95rem}
+.galerie{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));grid-auto-rows:160px;grid-auto-flow:dense;gap:.6rem}
+.vignette{padding:0;border:0;cursor:zoom-in;border-radius:3px;overflow:hidden;background:var(--surface)}
+.vignette img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.vignette:hover img{transform:scale(1.04)}
+.vignette.portrait{grid-row:span 2}
+.vignette.large{grid-column:span 2;grid-row:span 2}
+@media (max-width:480px){.galerie{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px}}
+@media (prefers-reduced-motion:reduce){.vignette img{transition:none}}
+.visionneuse{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);width:100%;color:#fff}
+.visionneuse::backdrop{background:rgba(3,12,30,.92)}
+.visionneuse figure{margin:0}
+.visionneuse img{width:100%;max-height:78vh;object-fit:contain;border-radius:3px}
+.visionneuse figcaption{margin-top:.6rem;font-size:.95rem;color:#E4E9F3}
+.visionneuse .compteur{color:#AEBBD6}
+.vis-boutons{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.vis-boutons button{font-family:var(--display);font-weight:800;font-size:.95rem;cursor:pointer;border:2px solid #fff;background:transparent;color:#fff;padding:.55rem 1rem;border-radius:4px}
+.vis-boutons button:hover{background:rgba(255,255,255,.12)}
+.vis-boutons .fermer{margin-left:auto;background:var(--jaune);border-color:var(--jaune);color:#000}
+@media (max-width:860px){.lecture-grille{grid-template-columns:1fr}.encadre{position:static}}
+
+/* Pawòl Desalin */
+.radyo{margin-bottom:clamp(2.5rem,5vw,4rem)}
+.radyo-carte{background:var(--bleu-fonce);color:#fff;border-radius:6px;padding:clamp(1.25rem,3vw,2rem);border-top:6px solid var(--rouge)}
+.radyo-tete{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
+.radyo-icone{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--rouge);color:#fff}
+.radyo-tete h3{font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:700;color:#fff}
+.radyo-tete p{margin:.2rem 0 0;color:#D6E0F2}
+.radyo-lecteur{background:#fff;border-radius:4px;padding:.5rem;min-height:120px;color:#101828}
+.radyo-attente{margin:.5rem;font-style:italic;color:#475467}
+.radyo-lecteur .cstrEmbed[data-rendered="false"] a{font-size:.75rem;color:#667085;margin:0 .5rem}
+.radyo-lecteur:has(.cstrEmbed[data-rendered="true"]) .radyo-attente{display:none}
+.direct{margin-bottom:clamp(2.5rem,5vw,4rem)}
+.nav a.nav-direct{display:inline-flex;align-items:center;gap:.4rem;background:var(--rouge);color:#fff}
+.nav a.nav-direct:hover{background:#b81c22}
+.nav-direct .point{width:.5rem;height:.5rem;border-radius:50%;background:#fff}
+@media (prefers-reduced-motion:no-preference){.nav-direct .point{animation:pulse 1.4s ease-in-out infinite}}
+.direct-tete{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin-bottom:1rem}
+.direct-tete h3{font-size:clamp(1.4rem,3vw,2rem);font-weight:900;font-stretch:106%}
+.badge-direct{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--display);font-weight:900;font-size:.95rem;padding:.35rem .8rem;border-radius:999px;background:var(--texte-doux);color:#fff}
+.direct.en-cours .badge-direct{background:var(--rouge)}
+.badge-direct .point{width:.6rem;height:.6rem;border-radius:50%;background:#fff}
+@media (prefers-reduced-motion:no-preference){.direct.en-cours .badge-direct .point{animation:pulse 1.4s ease-in-out infinite}@keyframes pulse{50%{opacity:.25}}}
+.direct-lecteur{position:relative;aspect-ratio:16/9;background:#000;border-radius:4px;overflow:hidden;max-height:75vh}
+.direct-lecteur iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.direct-lien{margin:.75rem 0 0;font-family:var(--display);font-weight:700}
+.pawol{border-top:1px solid var(--trait)}
+.pawol-grille{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(2rem,5vw,5rem);align-items:start}
+.pawol-tete{position:relative}
+.guillemet{display:block;font-family:var(--display);font-weight:900;font-size:clamp(7rem,14vw,11rem);line-height:.6;color:var(--rouge);margin-bottom:.5rem}
+.pawol-tete h2{font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;font-stretch:112%;color:var(--bleu)}
+:root[data-theme="dark"] .pawol-tete h2{color:var(--jaune)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pawol-tete h2{color:var(--jaune)}}
+.pawol-tete > p{font-size:1.15rem;color:var(--texte-doux);margin:1rem 0 1.5rem;max-width:26rem}
+.nouvelles{border-top:4px solid var(--texte)}
+.nouvelle{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:1.5rem;padding:1.4rem 0;border-bottom:1px solid var(--trait)}
+.nouvelle-meta{display:flex;flex-direction:column;gap:.2rem}
+.nouvelle-img{display:block;margin-bottom:.5rem;border-radius:3px;overflow:hidden;aspect-ratio:4/3;background:var(--surface)}
+.nouvelle-img img{width:100%;height:100%;object-fit:cover}
+.nouvelle-meta .date{font-family:var(--display);font-weight:600;font-size:.9rem;color:var(--texte-doux)}
+.nouvelle h3{font-size:1.4rem;font-weight:800;font-stretch:104%;line-height:1.15}
+.nouvelle h3 a{color:var(--texte);text-decoration:none}
+.nouvelle h3 a:hover{text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:var(--jaune)}
+.nouvelle p{margin:.4rem 0 0;color:var(--texte-doux);font-size:1rem}
+.nouvelles-vide{padding:2rem 0}
+.nouvelles-vide p{margin:0 0 .5rem;color:var(--texte-doux)}
+.nouvelles-vide .vide-titre{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--texte)}
+@media (max-width:760px){.pawol-grille{grid-template-columns:1fr}.nouvelle{grid-template-columns:1fr;gap:.4rem}.nouvelle-meta{flex-direction:row;flex-wrap:wrap;gap:.75rem}.nouvelle-img{flex-basis:100%;aspect-ratio:16/9}}
+
+/* À propos */
+.apropos{background:var(--bleu);color:#fff}
+.apropos .conteneur{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem)}
+.apropos h2{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;font-stretch:112%;color:var(--jaune)}
+.apropos .intro{font-size:clamp(1.15rem,1.8vw,1.35rem);line-height:1.6;margin:1.5rem 0 0;max-width:34rem}
+.missions{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.missions li{padding:1.4rem 0;border-top:2px solid rgba(255,255,255,.25)}
+.missions li:last-child{border-bottom:2px solid rgba(255,255,255,.25)}
+.missions h3{font-size:1.4rem;font-weight:800;color:#fff}
+.missions h3 span{color:var(--jaune)}
+.missions p{margin:.4rem 0 0;color:#D9E3F7}
+@media (max-width:760px){.apropos .conteneur{grid-template-columns:1fr}}
+
+/* Équipe */
+.equipe{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.membre{border-top:6px solid var(--c);padding-top:1rem}
+.initiales{width:92px;height:92px;border-radius:50%;background:var(--c);color:var(--ci);display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:2rem;margin-bottom:1rem}
+.membre h3{font-size:1.25rem;font-weight:800;line-height:1.15}
+.membre p{margin:.3rem 0 0;color:var(--texte-doux);font-size:.95rem}
+@media (max-width:900px){.equipe{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.equipe{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{background:var(--surface)}
+.contact .conteneur{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center}
+.contact h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;font-stretch:108%}
+.contact p{color:var(--texte-doux);max-width:32rem}
+.coordonnees{list-style:none;margin:0;padding:0;display:grid;gap:.75rem}
+.coordonnees li{background:var(--bg);border-left:6px solid var(--jaune);padding:1rem 1.25rem;border-radius:0 4px 4px 0}
+.coordonnees strong{display:block;font-family:var(--display);font-weight:800}
+.coordonnees span{color:var(--texte-doux);font-size:.95rem}
+.coordonnees a{font-size:1rem;word-break:break-word}
+.contact .bouton.plein{background:var(--bleu);border-color:var(--bleu);color:#fff;margin-top:.5rem}
+.contact .bouton.plein:hover{background:var(--bleu-fonce);border-color:var(--bleu-fonce)}
+@media (max-width:760px){.contact .conteneur{grid-template-columns:1fr}}
+
+/* Pied de page */
+.pied{background:var(--noir);color:#fff;padding-block:2.5rem}
+.pied .conteneur{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem}
+.pied .logo img{height:44px}
+.pied p{margin:0;color:#C8CFDB;font-size:.95rem}
+.pied a{color:var(--jaune)}
+.pied .installer{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #2a2a2a}
+.pied .installer .bouton.plein{background:var(--jaune);border-color:var(--jaune);color:#000}
+.pied .installer-ios{color:#C8CFDB}
+.lecture-corps blockquote{margin:2rem 0;padding:0 0 0 1rem;border-left:8px solid var(--jaune)}
+.lecture-corps blockquote p{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3vw,2rem);line-height:1.15;color:var(--bleu);margin:0}
+:root[data-theme="dark"] .lecture-corps blockquote p{color:var(--jaune)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lecture-corps blockquote p{color:var(--jaune)}}
+.lecture-corps ul{margin:-.4em 0 1.6em;padding-left:1.4em;font-size:1.1rem;line-height:1.7}
+.lecture-corps h2,.lecture-corps h3{margin:2rem 0 .8rem;font-size:1.5rem}
+.lecture-corps small{font-size:.9rem;color:var(--texte-doux)}
+.lecture-corps p:has(> em:only-child),.lecture-corps p.fin{color:var(--texte-doux)}
+.lecture-corps a{color:var(--lien)}
+</style>
+</head>
+<body>
+
+<header class="entete">
+  <div class="conteneur">
+    <a class="logo" href="#accueil" aria-label="Desalin Kilti, retour à l’accueil" data-i18n-aria="logo_aria"><img src="logo.png" alt="Desalin Kilti"></a>
+    <nav class="nav" aria-label="Navigation principale" data-i18n-aria="nav_aria">
+      <a href="#direct" class="nav-direct" id="nav-direct" hidden><span class="point" aria-hidden="true"></span><span data-i18n="en_direct">En direct</span></a>
+      <a href="#media" data-i18n="nav_media">Média</a>
+      <a href="#pawol">Pawòl Desalin</a>
+      <a href="#radyo">Radyo</a>
+      <a href="#apropos" data-i18n="nav_apropos">À propos</a>
+      <a href="#equipe" data-i18n="nav_equipe">Équipe</a>
+      <a class="cta" href="#contact" data-i18n="nav_contact">Nous joindre</a>
+    </nav>
+    <div class="langue" role="group" aria-label="Choisir la langue" data-i18n-aria="lang_aria">
+      <button type="button" data-lang="ht" lang="ht" aria-label="Kreyòl" aria-pressed="false"><span class="long">Kreyòl</span><span class="court" aria-hidden="true">KR</span></button>
+      <button type="button" data-lang="fr" lang="fr" aria-label="Français" aria-pressed="true"><span class="long">Français</span><span class="court" aria-hidden="true">FR</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="accueil">
+  <section class="hero">
+    <div class="hero-fond" aria-hidden="true">
+      <div class="scene">
+        <div class="kb">
+          <img class="paysage" src="media/accueil-paysage.jpg" alt="">
+          <span class="nuage n1"></span><span class="nuage n2"></span><span class="nuage n3"></span><span class="nuage n4"></span>
+          <span class="reflets"></span>
+        </div>
+      </div>
+      <div class="voile"></div>
+    </div>
+    <div class="conteneur">
+      <div class="texte">
+        <h1 data-i18n="hero_titre">La culture de Dessalines, vivante et partagée.</h1>
+        <p data-i18n="hero_texte">Desalin Kilti fait rayonner la culture et les traditions de notre commune, et donne aux jeunes le goût de l'école et de la lecture.</p>
+        <div class="boutons">
+          <a class="bouton plein" href="#media" data-i18n="hero_b1">Lire nos articles</a>
+          <a class="bouton vide" href="#apropos" data-i18n="hero_b2">Découvrir l'organisation</a>
+        </div>
+      </div>
+      <div class="dieze" aria-hidden="true">#</div>
+    </div>
+  </section>
+
+  <section class="section" id="media" aria-labelledby="titre-media">
+    <div class="conteneur">
+      <div class="titre-section">
+        <div>
+          <h2 id="titre-media" data-i18n="media_titre">Le média</h2>
+          <p data-i18n="media_sous">Reportages, portraits et conseils de lecture sur la vie culturelle de Dessalines.</p>
+        </div>
+        <div class="filtres" role="group" aria-label="Filtrer les articles par thème" data-i18n-aria="media_aria">
+          <button class="filtre" aria-pressed="true" data-filtre="tout" data-i18n="tout">Tout</button>
+          <button class="filtre" aria-pressed="false" data-filtre="kilti">#Kilti</button>
+          <button class="filtre" aria-pressed="false" data-filtre="patrimwan">#Patrimwàn</button>
+          <button class="filtre" aria-pressed="false" data-filtre="edikasyon">#Edikasyon</button>
+        </div>
+      </div>
+      <div class="articles" id="articles"></div>
+    </div>
+  </section>
+
+  <section class="section pawol" id="pawol" aria-labelledby="titre-pawol">
+    <div class="conteneur radyo" id="radyo">
+      <div class="radyo-carte">
+        <div class="radyo-tete">
+          <span class="radyo-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+          </span>
+          <div>
+            <h3>Desalin Kilti Radyo</h3>
+            <p data-i18n="radyo_sous">Écoutez nos émissions en direct, partout dans le monde.</p>
+          </div>
+        </div>
+        <div class="radyo-lecteur">
+          <p class="radyo-attente" data-i18n="radyo_attente">Le lecteur radio s’affiche sur le site en ligne.</p>
+          <div id="radyo-widget"></div>
+        </div>
+      </div>
+    </div>
+    <div class="conteneur direct" id="direct" hidden>
+      <div class="direct-tete">
+        <span class="badge-direct" id="direct-badge"><span class="point" aria-hidden="true"></span><span id="direct-etat"></span></span>
+        <h3 id="direct-titre"></h3>
+      </div>
+      <div class="direct-lecteur"><iframe id="direct-iframe" title="" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <p class="direct-lien"><a id="direct-lien" href="#" target="_blank" rel="noopener"></a></p>
+    </div>
+    <div class="conteneur pawol-grille">
+      <div class="pawol-tete">
+        <span class="guillemet" aria-hidden="true">«</span>
+        <h2 id="titre-pawol">Pawòl Desalin</h2>
+        <p data-i18n="pawol_sous">L’actualité politique, sociale et économique de Dessalines-Ville.</p>
+        <div class="filtres pawol-filtres" role="group" aria-label="Filtrer les nouvelles par rubrique" data-i18n-aria="pawol_aria">
+          <button class="filtre" aria-pressed="true" data-rubrique="tout" data-i18n="tout">Tout</button>
+          <button class="filtre" aria-pressed="false" data-rubrique="politik">#Politik</button>
+          <button class="filtre" aria-pressed="false" data-rubrique="sosyal">#Sosyal</button>
+          <button class="filtre" aria-pressed="false" data-rubrique="ekonomi">#Ekonomi</button>
+        </div>
+      </div>
+      <div class="nouvelles" id="nouvelles" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section apropos" id="apropos" aria-labelledby="titre-apropos">
+    <div class="conteneur">
+      <div>
+        <h2 id="titre-apropos" data-i18n="apropos_titre">Qui sommes-nous?</h2>
+        <p class="intro" data-i18n="apropos_intro">Desalin Kilti est une organisation culturelle et sociale qui œuvre à la promotion de la culture tout en valorisant les traditions locales de la commune de Dessalines. Elle encourage aussi les jeunes à s'investir dans leur éducation et les sensibilise à l'importance de la lecture.</p>
+      </div>
+      <ul class="missions">
+        <li>
+          <h3><span>#</span>Kilti</h3>
+          <p data-i18n="m_kilti">Promouvoir la culture sous toutes ses formes et donner de la visibilité aux talents de la commune.</p>
+        </li>
+        <li>
+          <h3><span>#</span>Tradisyon</h3>
+          <p data-i18n="m_tradisyon">Valoriser les traditions locales de Dessalines pour qu'elles se transmettent d'une génération à l'autre.</p>
+        </li>
+        <li>
+          <h3><span>#</span>Edikasyon</h3>
+          <p data-i18n="m_edikasyon">Encourager les jeunes à poursuivre leurs études et à croire en ce que l'école peut leur apporter.</p>
+        </li>
+        <li>
+          <h3><span>#</span>Lekti</h3>
+          <p data-i18n="m_lekti">Sensibiliser à l'importance de la lecture et faire du livre un compagnon du quotidien.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="equipe" aria-labelledby="titre-equipe">
+    <div class="conteneur">
+      <div class="titre-section">
+        <div>
+          <h2 id="titre-equipe" data-i18n="equipe_titre">L'équipe</h2>
+          <p data-i18n="equipe_sous">Les personnes qui font vivre Desalin Kilti au quotidien.</p>
+        </div>
+      </div>
+      <ul class="equipe" id="liste-equipe"></ul>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact" aria-labelledby="titre-contact">
+    <div class="conteneur">
+      <div>
+        <h2 id="titre-contact" data-i18n="contact_titre">Nous joindre</h2>
+        <p data-i18n="contact_texte">Vous voulez participer à nos activités, proposer un sujet au média ou soutenir nos projets pour les jeunes? Écrivez-nous par courriel ou sur Facebook.</p>
+        <a class="bouton plein" href="mailto:desalinkilti@yahoo.com" data-i18n="contact_bouton">Nous écrire</a>
+      </div>
+      <ul class="coordonnees">
+        <li><strong data-i18n="courriel">Courriel</strong><a href="mailto:desalinkilti@yahoo.com">desalinkilti@yahoo.com</a></li>
+        <li><strong>Facebook</strong><a href="https://www.facebook.com/share/1BiPsRZGAM/?mibextid=wwXIfr" target="_blank" rel="noopener" data-i18n="fb_lien">Suivez notre page Facebook</a></li>
+        <li><strong data-i18n="adresse">Adresse</strong><span data-i18n="adresse_val">Dessalines, Haïti</span></li>
+      </ul>
+    </div>
+  </section>
+  <article class="lecture" id="lecture" aria-labelledby="lecture-titre">
+    <header class="lecture-entete">
+      <div class="conteneur">
+        <a class="retour" href="#media">Retour au média</a>
+        <span class="tag" id="lecture-tag"></span>
+        <h1 id="lecture-titre" tabindex="-1"></h1>
+        <p class="meta" id="lecture-meta"></p>
+      </div>
+    </header>
+    <div class="conteneur">
+      <figure class="photo-une" id="photo-une">
+        <img id="photo-une-img" src="" alt="">
+        <figcaption id="photo-une-legende"></figcaption>
+      </figure>
+    </div>
+    <div class="conteneur lecture-grille">
+      <div class="lecture-corps" id="lecture-corps"></div>
+      <aside class="encadre" id="encadre" aria-labelledby="titre-palmares">
+        <h2 id="titre-palmares">Palmarès</h2>
+        <dl id="lecture-palmares"></dl>
+      </aside>
+    </div>
+    <section class="conteneur galerie-bloc" id="galerie-bloc" aria-labelledby="titre-galerie">
+      <div class="galerie-titre">
+        <h2 id="titre-galerie" data-i18n="en_images">En images</h2>
+        <p id="galerie-credit"></p>
+      </div>
+      <div class="galerie" id="galerie"></div>
+    </section>
+  </article>
+  <dialog class="visionneuse" id="visionneuse" aria-label="Photo en grand format" data-i18n-aria="vis_aria">
+    <figure>
+      <img id="vis-img" src="" alt="">
+      <figcaption><span id="vis-legende"></span> <span class="compteur" id="vis-compteur"></span></figcaption>
+    </figure>
+    <div class="vis-boutons">
+      <button type="button" id="vis-prec" data-i18n="vis_prec">Photo précédente</button>
+      <button type="button" id="vis-suiv" data-i18n="vis_suiv">Photo suivante</button>
+      <button type="button" id="vis-fermer" class="fermer" data-i18n="vis_fermer">Fermer</button>
+    </div>
+  </dialog>
+</main>
+
+<footer class="pied">
+  <div class="conteneur">
+    <span class="logo"><img src="logo.png" alt="Desalin Kilti"></span>
+    <p>© <span id="annee"></span> Desalin Kilti. <span data-i18n="pied">Organisation culturelle et sociale de Dessalines.</span><br><a href="mailto:desalinkilti@yahoo.com">desalinkilti@yahoo.com</a> | <a href="https://www.facebook.com/share/1BiPsRZGAM/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></p>
+  </div>
+  <div class="conteneur installer" id="installer" hidden>
+    <button type="button" class="bouton plein" id="btn-installer" data-i18n="installer" hidden>Installer l’application</button>
+    <p class="installer-ios" id="installer-ios" data-i18n="installer_ios" hidden>Pour installer l’application sur iPhone : touchez le bouton Partager, puis « Sur l’écran d’accueil ».</p>
+  </div>
+</footer>
+
+<script>window.DK_PWA = true;</script>
+<script src="app.js"></script>
+</body>
+</html>
