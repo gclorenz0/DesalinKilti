@@ -39,7 +39,7 @@ fs.writeFileSync(path.join(DIST, "data.json"), data);
 // Service worker (application installable, lecture hors connexion)
 const version = "dk-" + crypto.createHash("sha1").update(data + fs.readFileSync(path.join(DIST, "index.html")) + fs.readFileSync(path.join(DIST, "app.js"))).digest("hex").slice(0, 10);
 const coeur = ["./", "index.html", "app.js", "data.json", "logo.png", "manifest.webmanifest", "media/accueil-paysage.jpg",
-  "fonts/pagella-regular.woff2", "fonts/pagella-italic.woff2", "fonts/pagella-bold.woff2", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
+  "fonts/roboto.woff2", "fonts/roboto-italic.woff2", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 fs.writeFileSync(path.join(DIST, "sw.js"), `const VERSION = ${JSON.stringify(version)};
 const COEUR = ${JSON.stringify(coeur)};
 self.addEventListener("install", e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(COEUR)).then(() => self.skipWaiting())); });
