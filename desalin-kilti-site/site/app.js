@@ -99,8 +99,8 @@
     if(!R.afficher || !R.jeton_public){ bloc.hidden = true; return; }
     var zoneW = document.getElementById("radyo-widget"); zoneW.innerHTML = "";
     var w = document.createElement("div"); w.className = "cstrEmbed";
-    w.setAttribute("data-type", R.type_lecteur || "podcastsPlayer"); w.setAttribute("data-publicToken", R.jeton_public);
-    w.setAttribute("data-theme", "light"); w.setAttribute("data-color", "e3242b"); w.setAttribute("data-channelId", R.id_chaine || ""); w.setAttribute("data-rendered", "false");
+    w.setAttribute("data-type", R.type_lecteur || "newStreamPlayer"); w.setAttribute("data-publicToken", R.jeton_public);
+    w.setAttribute("data-theme", "light"); w.setAttribute("data-color", "000000"); w.setAttribute("data-channelId", R.id_chaine || ""); w.setAttribute("data-rendered", "false");
     w.innerHTML = '<a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a>';
     zoneW.appendChild(w);
     var sc = document.createElement("script"); sc.src = "https://cdn.cloud.caster.fm//widgets/embed.js"; zoneW.appendChild(sc);
