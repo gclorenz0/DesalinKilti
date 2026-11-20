@@ -1,6 +1,6 @@
 # Configuration du tableau de bord Pages CMS (https://app.pagescms.org) pour le site Desalin Kilti
 media:
-  input: media
+  input: desalin-kilti-site/media
   output: /media
   extensions: [jpg, jpeg, png, webp]
 
@@ -9,7 +9,7 @@ content:
   - name: media
     label: "Média (articles)"
     type: collection
-    path: content/media
+    path: desalin-kilti-site/content/media
     format: json
     filename: "{primary}.json"
     view:
@@ -113,7 +113,7 @@ content:
   - name: pawol
     label: "Pawòl Desalin (nouvelles)"
     type: collection
-    path: content/pawol
+    path: desalin-kilti-site/content/pawol
     format: json
     filename: "{primary}.json"
     view:
@@ -211,7 +211,7 @@ content:
   - name: reglages
     label: "Réglages (direct, radio, équipe)"
     type: file
-    path: content/reglages.json
+    path: desalin-kilti-site/content/reglages.json
     format: json
     fields:
       - name: direct
