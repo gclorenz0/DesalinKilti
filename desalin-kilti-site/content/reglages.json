@@ -7,7 +7,7 @@
   },
   "radyo": {
     "afficher": true,
-    "type_lecteur": "streamPlayer",
+    "type_lecteur": "newStreamPlayer",
     "jeton_public": "80fc5f6d-82f0-4ea9-9b6b-edae3cf383da",
     "id_chaine": "a2f5ab74-0ebc-4c75-98f4-5adec3d8b649"
   },
