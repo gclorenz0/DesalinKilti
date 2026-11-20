@@ -103,7 +103,7 @@
     w.setAttribute("data-theme", "light"); w.setAttribute("data-color", "000000"); w.setAttribute("data-channelId", R.id_chaine || ""); w.setAttribute("data-rendered", "false");
     w.innerHTML = '<a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a>';
     zoneW.appendChild(w);
-    var sc = document.createElement("script"); sc.src = "https://cdn.cloud.caster.fm//widgets/embed.js"; zoneW.appendChild(sc);
+    var sc = document.createElement("script"); sc.src = "https://cdn.cloud.caster.fm/widgets/embed.js"; zoneW.appendChild(sc);
   }
   // État de la radio (comme pour le direct) : hors antenne, en direct ou rediffusion
   function afficherRadio(){
