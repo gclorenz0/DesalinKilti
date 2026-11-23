@@ -36,6 +36,59 @@ const reglages = lire(path.join(RACINE, "content", "reglages.json")) || {};
 const data = JSON.stringify({ articles, reglages });
 fs.writeFileSync(path.join(DIST, "data.json"), data);
 
+// Pages de partage : une page par article (/a/<slug>/) qui porte le titre, le résumé et l'image en tête
+// pour l'aperçu dans Facebook, WhatsApp, Messenger, etc. Les visiteurs sont renvoyés vers l'article.
+const SITE = String(process.env.URL || reglages.url_site || "https://desalinkilti.org").replace(/\/+$/, "");
+const esc = (t) => String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const absolu = (u) => /^https?:\/\//.test(u) ? u : SITE + "/" + String(u).replace(/^\/+/, "");
+const texteBrut = (h) => String(h || "").replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+function metas({ titre, description, image, url, langue, type }) {
+  return [
+    `<meta property="og:site_name" content="Desalin Kilti">`,
+    `<meta property="og:type" content="${type}">`,
+    `<meta property="og:locale" content="${langue === "ht" ? "ht_HT" : "fr_FR"}">`,
+    `<meta property="og:title" content="${esc(titre)}">`,
+    `<meta property="og:description" content="${esc(description)}">`,
+    `<meta property="og:url" content="${esc(url)}">`,
+    `<meta property="og:image" content="${esc(image)}">`,
+    `<meta property="og:image:alt" content="${esc(titre)}">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
+    `<meta name="twitter:title" content="${esc(titre)}">`,
+    `<meta name="twitter:description" content="${esc(description)}">`,
+    `<meta name="twitter:image" content="${esc(image)}">`,
+  ].join("\n");
+}
+const imageDefaut = absolu("media/accueil-paysage.jpg");
+// Page d'accueil : mêmes balises, avec l'image d'accueil
+const accueilHtml = fs.readFileSync(path.join(DIST, "index.html"), "utf8");
+const descAccueil = "Desalin Kilti, organisation culturelle et sociale de la commune de Dessalines : culture, traditions locales, éducation et lecture.";
+fs.writeFileSync(path.join(DIST, "index.html"), accueilHtml.replace("</head>", metas({ titre: "Desalin Kilti", description: descAccueil, image: imageDefaut, url: SITE + "/", langue: "fr", type: "website" }) + "\n</head>"));
+for (const a of articles) {
+  const img = a.image || ((a.galerie || []).find((g) => g && g.image) || {}).image;
+  const url = SITE + "/a/" + encodeURIComponent(a.slug) + "/";
+  const desc = (a.resume && String(a.resume).trim()) || texteBrut(a.corps).slice(0, 200) || descAccueil;
+  const cible = "/#article/" + encodeURIComponent(a.slug);
+  const page = `<!DOCTYPE html>
+<html lang="${a.langue === "ht" ? "ht" : "fr"}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(a.titre)} | Desalin Kilti</title>
+<meta name="description" content="${esc(desc)}">
+<link rel="canonical" href="${esc(url)}">
+${metas({ titre: a.titre, description: desc, image: img ? absolu(img) : imageDefaut, url, langue: a.langue, type: "article" })}
+<meta http-equiv="refresh" content="0;url=${esc(cible)}">
+<script>location.replace(${JSON.stringify(cible)});</script>
+</head>
+<body>
+<p><a href="${esc(cible)}">${esc(a.titre)}</a></p>
+</body>
+</html>
+`;
+  fs.mkdirSync(path.join(DIST, "a", a.slug), { recursive: true });
+  fs.writeFileSync(path.join(DIST, "a", a.slug, "index.html"), page);
+}
+
 // Service worker (application installable, lecture hors connexion)
 const version = "dk-" + crypto.createHash("sha1").update(data + fs.readFileSync(path.join(DIST, "index.html")) + fs.readFileSync(path.join(DIST, "app.js"))).digest("hex").slice(0, 10);
 const coeur = ["./", "index.html", "app.js", "data.json", "logo.png", "manifest.webmanifest", "media/accueil-paysage.jpg",
@@ -49,7 +102,7 @@ self.addEventListener("fetch", e => {
   const url = new URL(req.url); if (url.origin !== location.origin) return;
   const reseauDabord = req.mode === "navigate" || url.pathname.endsWith("/data.json") || url.pathname.endsWith("/app.js");
   if (reseauDabord) {
-    e.respondWith(fetch(req).then(r => { const c = r.clone(); caches.open(VERSION).then(x => x.put(req.mode === "navigate" ? "index.html" : req, c)); return r; })
+    e.respondWith(fetch(req).then(r => { if (!url.pathname.startsWith("/a/")) { const c = r.clone(); caches.open(VERSION).then(x => x.put(req.mode === "navigate" ? "index.html" : req, c)); } return r; })
       .catch(() => caches.match(req.mode === "navigate" ? "index.html" : req)));
     return;
   }
